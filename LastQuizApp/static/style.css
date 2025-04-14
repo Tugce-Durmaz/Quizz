@@ -1,0 +1,10 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+footer {
+    margin-top: 50px;
+    font-size: 14px;
+    text-align: center;
+    color: #888;
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ session['topic'] }} - Soru {{ index }} / {{ total }}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 700px;
+            text-align: center;
+            border: 2px solid #1e3a8a; /* Lacivert tonlarında kenar */
+        }
+
+        h1, h2 {
+            color: #1e3a8a; /* Lacivert başlık */
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.6em;
+            margin-bottom: 30px;
+        }
+
+        .error {
+            color: #e74c3c;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        fieldset {
+            border: 2px solid #1e3a8a;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        legend {
+            font-size: 1.5em;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 1.2em;
+            color: #333;
+            display: block;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #1e3a8a; /* Lacivert buton */
+            color: #fff;
+            padding: 12px 0;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.2em;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #16427d; /* Lacivert koyu ton */
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.4em;
+            }
+
+            button {
+                font-size: 1em;
+            }
+
+            label {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ session['topic'] }} Konulu Sınav</h1>
+        <h2>Soru {{ index }} / {{ total }}</h2>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST">
+            <fieldset>
+                <legend>{{ question.question_text }}</legend>
+                <label>
+                    <input type="radio" name="answer" value="A"> {{ question.option_a }}
+                </label>
+                <label>
+                    <input type="radio" name="answer" value="B"> {{ question.option_b }}
+                </label>
+                <label>
+                    <input type="radio" name="answer" value="C"> {{ question.option_c }}
+                </label>
+                <label>
+                    <input type="radio" name="answer" value="D"> {{ question.option_d }}
+                </label>
+            </fieldset>
+            <button type="submit">Cevapla ve Devam Et</button>
+        </form>
+    </div>
+</body>
+</html>
