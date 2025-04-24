@@ -3,6 +3,23 @@ from app import db
 from models import User, Question, Score
 
 main = Blueprint('main', __name__)
+@main.app_context_processor
+def inject_score_data():
+    user_id = session.get('user_id')
+    if not user_id:
+        return {}
+
+    user = User.query.get(user_id)
+    score_data = Score.query.filter_by(user_id=user.id).first()
+    latest_score = score_data.latest_score if score_data else 0
+    highest_score = score_data.highest_score if score_data else 0
+    top_score = db.session.query(db.func.max(Score.highest_score)).scalar()
+
+    return {
+        "latest_score": latest_score,
+        "highest_score": highest_score,
+        "top_score": top_score
+    }
 
 @main.route('/', methods=['GET', 'POST'])
 def home():
